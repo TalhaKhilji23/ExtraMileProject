@@ -4,7 +4,7 @@ import React from 'react';
 export default function Hello() {
   return (
     <View>
-      <Text>Hello</Text>
+      <Text>Hello guyzzz</Text>
     </View>
   );
 }
