@@ -1,10 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-export default function App() {
+export default function Name() {
   return (
     <View>
-      <Text>Appkbjlsdfl</Text>
+      <Text>Namecxkhbcjnkc</Text>
     </View>
   );
 }
