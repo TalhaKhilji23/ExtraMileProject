@@ -7,6 +7,7 @@ import {
   ScrollView,
   FlatList,
   Pressable,
+  TextInput,
   Image,
   Dimensions,
   Button,
@@ -14,6 +15,7 @@ import {
 import {productData} from '../global/Data';
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import * as Animatable from 'react-native-animatable';
 
 import {ProductCard} from '../components/ProductCard';
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -27,40 +29,42 @@ export default function Wishlist({navigation}) {
           height: 40,
           width: 350,
           marginLeft: 10,
-          marginBottom: 10,
+          marginBottom: 25,
         }}>
         <MaterialIcons
-          name="email"
-          style={{color: 'black', marginLeft: 20, marginTop: 10}}
-          size={20}
+          name="menu"
+          style={{color: 'black', marginLeft: 20, marginTop: 16, height: 30}}
+          size={30}
+          onPress={() => {
+            navigation.toggleDrawer();
+          }}
         />
-        <View
-          style={{
-            backgroundColor: 'lightgrey',
-            height: 35,
-            width: 288,
-            borderRadius: 60,
-            marginLeft: 30,
-            marginTop: 10,
-            flexDirection: 'row',
-          }}>
-          <MaterialIcons
-            name="email"
-            style={{color: 'grey', marginLeft: 20, marginTop: 4}}
-            size={20}
-          />
-          <Text style={{marginLeft: 50, marginTop: 5, fontSize: 14}}>
-            Search for the wishlist
-          </Text>
-          <MaterialIcons
-            name="email"
-            style={{color: 'grey', marginLeft: 40, marginTop: 4}}
-            size={20}
-          />
+        <View style={{marginTop: 10}}>
+          <View style={styles.textInput2}>
+            <Animatable.View animation={'fadeInLeft'} duration={800}>
+              <MaterialIcons
+                name="search"
+                style={{color: '#002C4F'}}
+                size={20}
+              />
+            </Animatable.View>
+
+            <TextInput
+              style={{width: '75%', height: 40}}
+              placeholder={'Search you wishlist .... '}
+            />
+
+            <Animatable.View animation={'fadeInLeft'} duration={800}>
+              <MaterialIcons
+                name="sort"
+                style={{color: '#002C4F', marginRight: 10}}
+                size={20}
+              />
+            </Animatable.View>
+          </View>
         </View>
       </View>
       <View>
-        <TouchableOpacity>
           <FlatList
             style={{marginBottom: 10}}
             data={productData}
@@ -75,7 +79,7 @@ export default function Wishlist({navigation}) {
                     screenWidth={SCREEN_WIDTH * 0.425}
                     images={item.images}
                     productName={item.productName}
-                    company={item.company}
+                    price={item.price}
                   />
                 </View>
               </TouchableOpacity>
@@ -84,7 +88,6 @@ export default function Wishlist({navigation}) {
             verticalScrollIndicator={false}
             numColumns={2}
           />
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -98,6 +101,17 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH * 0.3775,
     height: SCREEN_WIDTH * 0.6275,
     marginLeft: 30,
-    marginBottom: 30,
+    marginBottom: 0,
+  },
+  textInput2: {
+    borderWidth: 1,
+    borderRadius: 22,
+    marginHorizontal: 20,
+    borderColor: '#E4DFDF',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 15,
   },
 });

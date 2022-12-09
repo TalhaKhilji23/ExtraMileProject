@@ -12,9 +12,8 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export const ProductCard = ({
-  orderName,
+  productName,
 
-  company,
   price,
 
   images,
@@ -26,19 +25,22 @@ export const ProductCard = ({
         <Image
           style={{...styles.image, width: screenWidth, borderRadius: 12}}
           source={{uri: images}}></Image>
-        <View style={{flexDirection: 'row'}}>
-          <View>
-            <Text
-              style={{
-                backgroundColor: 'white',
-                width: 15,
-                height: 15,
-                borderRadius: 25,
-                marginTop: -7,
-                marginLeft: 54,
-                marginRight: -10,
-              }}></Text>
-          </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            height: 25,
+            width: 1,
+          }}>
+          <View
+            style={{
+              backgroundColor: 'white',
+              width: 15,
+              height: 15,
+              borderRadius: 25,
+              marginTop: -7,
+              marginLeft: 54,
+              marginRight: -10,
+            }}></View>
           <View
             style={{
               backgroundColor: 'white',
@@ -53,55 +55,41 @@ export const ProductCard = ({
                 backgroundColor: 'black',
                 height: 33,
                 width: 39,
-                marginTop: 5,
+                marginTop: 6,
                 borderRadius: 50,
                 marginLeft: 10,
               }}>
               <MaterialIcons
-                name="email"
-                style={{color: 'white', alignSelf: 'center'}}
+                name="local-mall"
+                style={{color: 'white', marginLeft: 10, marginTop: 4}}
                 size={20}
               />
             </View>
           </View>
-          <View>
-            <Text
-              style={{
-                backgroundColor: 'white',
-                width: 15,
-                height: 15,
-                borderRadius: 25,
-                marginTop: -7,
-                marginLeft: -10,
-              }}></Text>
-          </View>
+          <View
+            style={{
+              backgroundColor: 'white',
+              width: 15,
+              height: 15,
+              borderRadius: 25,
+              marginTop: -7,
+              marginLeft: -10,
+            }}></View>
         </View>
 
         <View>
-          <Text style={styles.orderName}>{orderName}</Text>
+          <Text style={styles.productName}>{productName}</Text>
         </View>
 
         <View>
           <View>
             <Text
               style={{
-                fontSize: 15,
-                fontWeight: 'bold',
-                color: 'lightblue',
-                marginLeft: 10,
-              }}>
-              {company}{' '}
-            </Text>
-          </View>
-        </View>
-        <View>
-          <View>
-            <Text
-              style={{
-                fontSize: 15,
+                fontSize: 18,
                 fontWeight: 'bold',
                 color: 'black',
                 marginLeft: 10,
+                alignSelf: 'center',
               }}>
               {price}{' '}
             </Text>
@@ -114,7 +102,6 @@ export const ProductCard = ({
 
 const styles = StyleSheet.create({
   cardView: {
-    marginHorizontal: 9,
     borderTopRightRadius: 15,
     borderTopLeftRadius: 15,
     borderWidth: 1,
@@ -126,14 +113,13 @@ const styles = StyleSheet.create({
   image: {
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-    height: 130,
+    height: "65%",
     borderRadius: 5,
   },
-  orderName: {
+  productName: {
     fontSize: 17,
-    fontWeight: 'bold',
     color: 'black',
-    marginTop: 2,
-    marginLeft: 10,
+    marginLeft: '8%',
+    alignSelf: 'center',
   },
 });

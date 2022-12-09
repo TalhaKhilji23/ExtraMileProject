@@ -1,14 +1,11 @@
 import React, {useState} from 'react';
-import {Button, Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Cart from '../Screens/Cart';
-import Wishlist from '../Screens/Wishlist';
 import Home from '../Screens/Home';
 import Profile from '../Screens/Profile';
-const SettingsStack = createNativeStackNavigator();
+import WishListStack from './WishListStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,21 +23,6 @@ export default function TabNavigation() {
           },
         }}>
         <Tab.Screen
-          name="Wishlist"
-          component={Wishlist}
-          options={{
-            activeTintColor: 'red',
-            headerShown: false,
-            tabBarIcon: ({color, size}) => (
-              <MaterialIcons
-                name="settings"
-                style={{color: 'white'}}
-                size={25}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
           name="Home"
           component={Home}
           listeners={{
@@ -49,14 +31,27 @@ export default function TabNavigation() {
             },
           }}
           options={{
-            activeTintColor: 'red',
+            activeTintColor: 'black',
             headerShown: false,
 
             tabBarIcon: ({color, size}) => (
-              <MaterialIcons name="home" style={{color: 'white'}} size={30} />
+              <MaterialIcons name="home" style={{color: 'black'}} size={25} />
             ),
           }}
         />
+        <Tab.Screen
+          name="WishListStack"
+          component={WishListStack}
+          options={{
+            title: 'Wishlist',
+            activeTintColor: 'red',
+            headerShown: false,
+            tabBarIcon: ({color, size}) => (
+              <MaterialIcons name="favorite" style={{color: 'red'}} size={25} />
+            ),
+          }}
+        />
+
         <Tab.Screen
           name="Cart"
           component={Cart}
@@ -66,8 +61,8 @@ export default function TabNavigation() {
             headerShown: false,
             tabBarIcon: ({color, size}) => (
               <MaterialIcons
-                name="account-circle"
-                style={{color: 'white'}}
+                name="local-mall"
+                style={{color: 'black'}}
                 size={25}
               />
             ),
@@ -83,7 +78,7 @@ export default function TabNavigation() {
             tabBarIcon: ({color, size}) => (
               <MaterialIcons
                 name="account-circle"
-                style={{color: 'white'}}
+                style={{color: 'black'}}
                 size={25}
               />
             ),

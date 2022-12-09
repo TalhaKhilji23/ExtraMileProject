@@ -4,41 +4,33 @@ import {NavigationContainer} from '@react-navigation/native';
 // import { createNativeStackNavigator } from '@react-navigation/stack';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import DrawerNavigation from './DrawerNavigation';
 import ProductDetails from '../Screens/ProductDetails';
-
+import Wishlist from '../Screens/Wishlist';
+import WishlistHeader from '../components/WishlistHeader';
 const Stack = createNativeStackNavigator();
 
-const Root = () => {
+export default function WishListStack() {
   return (
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
       <Stack.Navigator
         // initialRouteName="Settings"
-        initialRouteName="DrawerNavigator"
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: '#F4511E',
-            paddingTop: 20,
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-          headerTitleAlign: 'center',
-          animation: 'slide_from_right',
-        }}>
+        initialRouteName="Wishlist">
         <Stack.Screen
-          name="DrawerNavigation"
-          component={DrawerNavigation}
+          name="Wishlist"
+          component={Wishlist}
           options={{
             headerShown: false,
           }}
         />
+
+        <Stack.Screen
+          name="ProductDetails"
+          component={ProductDetails}
+          options={{headerTitle: props => <WishlistHeader {...props} />}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
-};
-
-export default Root;
+}
 
 const styles = StyleSheet.create({});
