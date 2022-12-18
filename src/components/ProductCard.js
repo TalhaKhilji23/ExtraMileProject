@@ -17,20 +17,25 @@ export const ProductCard = ({
   productName,
 
   price,
+  margin,
 
   images,
   screenWidth,
+  screenHeight,
 }) => {
   return (
-    <View style={{...styles.cardView, width: screenWidth}}>
+    <View style={{...styles.cardView, width: screenWidth, marginLeft: margin}}>
       <Image
-        style={{...styles.image, width: screenWidth, borderRadius: 12}}
+        style={{
+          ...styles.image,
+          width: screenWidth,
+          height: screenHeight,
+          borderRadius: 12,
+        }}
         source={{uri: images}}></Image>
       <View style={styles.view1}>
         <View style={styles.view2}></View>
-        <View style={styles.view3}>
-          
-        </View>
+        <View style={styles.view3}></View>
         <View style={styles.view5}></View>
       </View>
 

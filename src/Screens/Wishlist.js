@@ -21,6 +21,7 @@ import {colors} from '../global/globalStyles';
 import {ProductCard} from '../components/ProductCard';
 import {add} from 'react-native-reanimated';
 const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_Height = Dimensions.get('window').height;
 
 export default function Wishlist({navigation}) {
   // const [img, setImg] = useState('');
@@ -110,6 +111,8 @@ export default function Wishlist({navigation}) {
               <View style={styles.imageView}>
                 <ProductCard
                   screenWidth={SCREEN_WIDTH * 0.425}
+                  screenHeight={SCREEN_Height * 0.185}
+
                   images={item.images}
                   productName={item.productName}
                   price={item.price}
