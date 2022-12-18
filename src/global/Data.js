@@ -2,6 +2,7 @@ export const productData = [
   {
     productName: 'Carburator',
     price: '3500',
+    company: 'Carby',
     businessAddress: '22 Bessie street, Cape Town',
     images:
       'https://c4.wallpaperflare.com/wallpaper/847/847/790/audi-engine-wallpaper-preview.jpg',
@@ -9,11 +10,14 @@ export const productData = [
       'Most fine carburator in the world having the world class power and deliver speed , giving you the horse power of 550hp',
 
     id: 0,
+    count: 1,
   },
 
   {
     productName: 'Tyres',
     price: '4200',
+    company: 'Service',
+
     businessAddress: '22 Bessie street, Cape Town',
     images:
       'https://img.freepik.com/premium-photo/black-isolation-rubber-tire-black-backgrounds_180633-2401.jpg',
@@ -26,6 +30,8 @@ export const productData = [
   {
     productName: 'Steering',
     price: '15000',
+    company: 'SoftSteers',
+
     businessAddress: ' 17 Olivia Rd, Johannesburg',
     images:
       'https://thumbs.dreamstime.com/b/steering-wheel-isolated-black-background-white-black-leather-modern-car-steering-wheel-isolated-black-background-170459598.jpg',
@@ -42,6 +48,8 @@ export const productData = [
   {
     productName: 'Brakes',
     price: '12000',
+    company: 'NoN-Stop',
+
     businessAddress: '15 Atlas Rd, Kempton Park',
     images:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsv0_DnPAUK9Vntpo9OJLp6j35xI0dO_6mKA&usqp=CAU',
@@ -54,6 +62,7 @@ export const productData = [
   {
     productName: 'GearsSet',
     price: '2399',
+    company: 'GearBg',
     businessAddress: '15 Atlas Rd, Kempton Park',
     images:
       'https://media.istockphoto.com/id/1150507732/photo/various-car-parts-and-accessories-on-black-background.jpg?s=612x612&w=0&k=20&c=UZW9qADTmNxFlrDIfi1e6mpZbHXb0vV17VOATtd_kYI=',
@@ -64,6 +73,8 @@ export const productData = [
   },
   {
     productName: 'Rims',
+    company: 'RSRims',
+
     price: '4999',
     businessAddress: '15 Atlas Rd, Kempton Park',
     images:
@@ -86,6 +97,8 @@ export const productData = [
   },
   {
     productName: 'Brakes',
+    company: 'RehbarBrakes',
+
     price: '2000',
     businessAddress: '15 Atlas Rd, Kempton Park',
     images:
@@ -97,6 +110,7 @@ export const productData = [
   },
   {
     productName: 'Brakes',
+    company: 'Carby',
     price: '50000',
     businessAddress: '15 Atlas Rd, Kempton Park',
     images:
@@ -108,6 +122,8 @@ export const productData = [
   },
   {
     productName: 'Brakes',
+    company: 'Carby',
+
     price: '15000',
     businessAddress: '15 Atlas Rd, Kempton Park',
     images:
@@ -119,7 +135,9 @@ export const productData = [
   },
   {
     productName: 'Brakes',
-    price: 'ABStryer',
+    price: '25000',
+    company: 'Carby',
+
     businessAddress: '15 Atlas Rd, Kempton Park',
     images:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsv0_DnPAUK9Vntpo9OJLp6j35xI0dO_6mKA&usqp=CAU',
@@ -127,5 +145,18 @@ export const productData = [
       'Being able to produce chunks of text very quickly is useful to see what the appearance of the finished piece of writing will look like, or to test how many words you can get on the page with a particular fon',
 
     id: 10,
+  },
+  {
+    productName: 'Brakes',
+    price: '25000',
+    company: 'Carby',
+
+    businessAddress: '15 Atlas Rd, Kempton Park',
+    images:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsv0_DnPAUK9Vntpo9OJLp6j35xI0dO_6mKA&usqp=CAU',
+    description:
+      'Being able to produce chunks of text very quickly is useful to see what the appearance of the finished piece of writing will look like, or to test how many words you can get on the page with a particular fon',
+
+    id: 11,
   },
 ];

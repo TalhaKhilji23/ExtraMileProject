@@ -17,12 +17,13 @@ import {
 // import { Avatar } from 'react-native-elements'
 import {Avatar, Button, Icon} from '@rneui/base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {colors} from '../global/globalStyles';
 
 const DrawerContents = props => {
   return (
     <View style={styles.container}>
       <DrawerContentScrollView {...props}>
-        <View style={{backgroundColor: 'white'}}>
+        <View>
           <View style={styles.avatarContainer}>
             <Avatar
               rounded
@@ -96,12 +97,12 @@ const DrawerContents = props => {
 
         <DrawerItemList {...props} />
 
-        <View style={{borderTopWidth: 1, borderTopColor: 'red'}}>
+        <View style={{borderTopWidth: 1, borderTopColor: colors.cardBackground}}>
           <Text style={styles.preferences}>Prefrences</Text>
         </View>
         <View
           style={{
-            backgroundColor: 'black',
+            backgroundColor: colors.black1,
             height: 40,
             width: 215,
             borderRadius: 25,
@@ -110,7 +111,7 @@ const DrawerContents = props => {
           }}>
           <View
             style={{
-              backgroundColor: 'white',
+              backgroundColor: colors.cardBackground,
               height: 30,
               marginTop: 5,
               marginLeft: 5,
@@ -136,10 +137,19 @@ const DrawerContents = props => {
                 }}>
                 <MaterialIcons
                   name="nights-stay"
-                  style={{color: 'white', marginLeft: 5, marginTop: 3}}
+                  style={{
+                    color: colors.cardBackground,
+                    marginLeft: 5,
+                    marginTop: 3,
+                  }}
                   size={20}
                 />
-                <Text style={{color: 'white', marginLeft: 10, marginTop: 3}}>
+                <Text
+                  style={{
+                    color: colors.cardBackground,
+                    marginLeft: 10,
+                    marginTop: 3,
+                  }}>
                   Dark
                 </Text>
               </View>
@@ -156,11 +166,14 @@ export default DrawerContents;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.cardBackground,
+    borderTopRightRadius: 35,
+    borderBottomLeftRadius: 35,
   },
   avatar: {
     borderWidth: 3,
 
-    borderColor: 'white',
+    borderColor: colors.cardBackground,
   },
   avatarContainer: {
     flexDirection: 'row',
@@ -170,7 +183,7 @@ const styles = StyleSheet.create({
   },
   preferences: {
     fontSize: 16,
-    color: 'red',
+    color: colors.cardBackground,
     paddingTop: 10,
     paddingLeft: 20,
   },
@@ -184,7 +197,7 @@ const styles = StyleSheet.create({
   },
   darkThemeText: {
     fontSize: 16,
-    color: 'red',
+    color: colors.cardBackground,
     paddingTop: 10,
     paddingLeft: 0,
     marginTop: 290,

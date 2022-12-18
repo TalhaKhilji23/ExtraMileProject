@@ -10,8 +10,10 @@ import React from 'react';
 // import {Icon} from '@rneui/themed';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {colors} from '../global/globalStyles';
 
 export const ProductCard = ({
+  navigation,
   productName,
 
   price,
@@ -20,83 +22,28 @@ export const ProductCard = ({
   screenWidth,
 }) => {
   return (
-    <TouchableOpacity>
-      <View style={{...styles.cardView, width: screenWidth}}>
-        <Image
-          style={{...styles.image, width: screenWidth, borderRadius: 12}}
-          source={{uri: images}}></Image>
-        <View
-          style={{
-            flexDirection: 'row',
-            height: 25,
-            width: 1,
-          }}>
-          <View
-            style={{
-              backgroundColor: 'white',
-              width: 15,
-              height: 15,
-              borderRadius: 25,
-              marginTop: -7,
-              marginLeft: 54,
-              marginRight: -10,
-            }}></View>
-          <View
-            style={{
-              backgroundColor: 'white',
-              width: 60,
-              height: 60,
-              borderRadius: 25,
-              marginTop: -19,
-            }}>
-            <View
-              style={{
-                color: 'white',
-                backgroundColor: 'black',
-                height: 33,
-                width: 39,
-                marginTop: 6,
-                borderRadius: 50,
-                marginLeft: 10,
-              }}>
-              <MaterialIcons
-                name="local-mall"
-                style={{color: 'white', marginLeft: 10, marginTop: 4}}
-                size={20}
-              />
-            </View>
-          </View>
-          <View
-            style={{
-              backgroundColor: 'white',
-              width: 15,
-              height: 15,
-              borderRadius: 25,
-              marginTop: -7,
-              marginLeft: -10,
-            }}></View>
+    <View style={{...styles.cardView, width: screenWidth}}>
+      <Image
+        style={{...styles.image, width: screenWidth, borderRadius: 12}}
+        source={{uri: images}}></Image>
+      <View style={styles.view1}>
+        <View style={styles.view2}></View>
+        <View style={styles.view3}>
+          
         </View>
+        <View style={styles.view5}></View>
+      </View>
 
-        <View>
-          <Text style={styles.productName}>{productName}</Text>
-        </View>
+      <View>
+        <Text style={styles.productName}>{productName}</Text>
+      </View>
 
+      <View>
         <View>
-          <View>
-            <Text
-              style={{
-                fontSize: 18,
-                fontWeight: 'bold',
-                color: 'black',
-                marginLeft: 10,
-                alignSelf: 'center',
-              }}>
-              {price}{' '}
-            </Text>
-          </View>
+          <Text style={styles.productPrice}>{price} </Text>
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
@@ -113,13 +60,49 @@ const styles = StyleSheet.create({
   image: {
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-    height: "65%",
+    height: '65%',
     borderRadius: 5,
   },
   productName: {
     fontSize: 17,
-    color: 'black',
+    color: colors.black1,
     marginLeft: '8%',
     alignSelf: 'center',
+  },
+  productPrice: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: colors.black1,
+    marginLeft: '8%',
+    alignSelf: 'center',
+  },
+  view1: {
+    flexDirection: 'row',
+    height: '12%',
+    width: 1,
+  },
+  view2: {
+    backgroundColor: colors.cardBackground,
+    width: 15,
+    height: 15,
+    borderRadius: 25,
+    marginTop: -7,
+    marginLeft: 50,
+    marginRight: -10,
+  },
+  view3: {
+    backgroundColor: colors.cardBackground,
+    width: 60,
+    height: 60,
+    borderRadius: 12,
+    marginTop: -15,
+  },
+  view5: {
+    backgroundColor: colors.cardBackground,
+    width: 15,
+    height: 15,
+    borderRadius: 25,
+    marginTop: -7,
+    marginLeft: -10,
   },
 });

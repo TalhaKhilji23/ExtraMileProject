@@ -6,6 +6,7 @@ import Cart from '../Screens/Cart';
 import Home from '../Screens/Home';
 import Profile from '../Screens/Profile';
 import WishListStack from './WishListStack';
+import {colors} from '../global/globalStyles';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,11 +32,15 @@ export default function TabNavigation() {
             },
           }}
           options={{
-            activeTintColor: 'black',
+            activeTintColor: colors.black1,
             headerShown: false,
 
             tabBarIcon: ({color, size}) => (
-              <MaterialIcons name="home" style={{color: 'black'}} size={25} />
+              <MaterialIcons
+                name="home"
+                style={{color: colors.black1}}
+                size={25}
+              />
             ),
           }}
         />
@@ -56,13 +61,13 @@ export default function TabNavigation() {
           name="Cart"
           component={Cart}
           options={{
-            tabBarLabel: 'Cart',
+            tabBarLabel: 'CartStack',
             activeTintColor: 'red',
             headerShown: false,
             tabBarIcon: ({color, size}) => (
               <MaterialIcons
                 name="local-mall"
-                style={{color: 'black'}}
+                style={{color: colors.black1}}
                 size={25}
               />
             ),
@@ -78,7 +83,7 @@ export default function TabNavigation() {
             tabBarIcon: ({color, size}) => (
               <MaterialIcons
                 name="account-circle"
-                style={{color: 'black'}}
+                style={{color: colors.black1}}
                 size={25}
               />
             ),

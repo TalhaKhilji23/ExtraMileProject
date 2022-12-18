@@ -7,6 +7,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ProductDetails from '../Screens/ProductDetails';
 import Wishlist from '../Screens/Wishlist';
 import WishlistHeader from '../components/WishlistHeader';
+import CartHeader from '../components/CartHeader';
+import Cart from '../Screens/Cart';
 const Stack = createNativeStackNavigator();
 
 export default function WishListStack() {
@@ -22,7 +24,11 @@ export default function WishListStack() {
             headerShown: false,
           }}
         />
-
+        <Stack.Screen
+          name="Cart"
+          component={Cart}
+          options={{headerTitle: props => <CartHeader {...props} />}}
+        />
         <Stack.Screen
           name="ProductDetails"
           component={ProductDetails}

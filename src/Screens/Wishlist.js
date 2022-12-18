@@ -9,20 +9,31 @@ import {
   Pressable,
   TextInput,
   Image,
+  Alert,
   Dimensions,
   Button,
 } from 'react-native';
 import {productData} from '../global/Data';
-import React from 'react';
+import React, {useState} from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
-
+import {colors} from '../global/globalStyles';
 import {ProductCard} from '../components/ProductCard';
+import {add} from 'react-native-reanimated';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function Wishlist({navigation}) {
+  // const [img, setImg] = useState('');
+  // const [name, setName] = useState('');
+  // const [key, setkey] = useState('');
+  // const [price, setPrice] = useState('');
+  const [clickCount, setClickCount] = useState(0);
+
+  const [list, setList] = useState([]);
+
   return (
-    <View style={{flex: 1, marginLeft: 5, backgroundColor: 'white'}}>
+    <View
+      style={{flex: 1, marginLeft: 5, backgroundColor: colors.cardBackground}}>
       <View
         style={{
           flexDirection: 'row',
@@ -33,7 +44,12 @@ export default function Wishlist({navigation}) {
         }}>
         <MaterialIcons
           name="menu"
-          style={{color: 'black', marginLeft: 20, marginTop: 16, height: 30}}
+          style={{
+            color: colors.black1,
+            marginLeft: 20,
+            marginTop: 16,
+            height: 30,
+          }}
           size={30}
           onPress={() => {
             navigation.toggleDrawer();
@@ -44,7 +60,7 @@ export default function Wishlist({navigation}) {
             <Animatable.View animation={'fadeInLeft'} duration={800}>
               <MaterialIcons
                 name="search"
-                style={{color: '#002C4F'}}
+                style={{color: colors.black1}}
                 size={20}
               />
             </Animatable.View>
@@ -57,37 +73,82 @@ export default function Wishlist({navigation}) {
             <Animatable.View animation={'fadeInLeft'} duration={800}>
               <MaterialIcons
                 name="sort"
-                style={{color: '#002C4F', marginRight: 10}}
+                style={{color: colors.black1, marginRight: '5%'}}
                 size={20}
               />
             </Animatable.View>
           </View>
         </View>
       </View>
+      <Text
+        style={{
+          backgroundColor: 'lightgrey',
+          height: 25,
+          width: 90,
+          color: 'white',
+          alignSelf: 'flex-end',
+          borderRadius: 12,
+          marginRight: 20,
+          paddingLeft: 10,
+        }}
+        onPress={() =>
+          navigation.navigate('Cart', {Lust: list, listToSet: setList})
+        }>
+        Add to Cart
+      </Text>
       <View>
-          <FlatList
-            style={{marginBottom: 10}}
-            data={productData}
-            keyExtractor={item => item.id}
-            renderItem={({item, index}) => (
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate('ProductDetails', {id: index})
-                }>
-                <View style={styles.imageView}>
-                  <ProductCard
-                    screenWidth={SCREEN_WIDTH * 0.425}
-                    images={item.images}
-                    productName={item.productName}
-                    price={item.price}
-                  />
-                </View>
-              </TouchableOpacity>
-            )}
-            horizontal={false}
-            verticalScrollIndicator={false}
-            numColumns={2}
-          />
+        <FlatList
+          keyboardShouldPersistTaps="handled"
+          style={{marginBottom: 10}}
+          data={productData}
+          keyExtractor={item => item.id}
+          renderItem={({item, index}) => (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('ProductDetails', {id: index})
+              }>
+              <View style={styles.imageView}>
+                <ProductCard
+                  screenWidth={SCREEN_WIDTH * 0.425}
+                  images={item.images}
+                  productName={item.productName}
+                  price={item.price}
+                />
+
+                <TouchableOpacity
+                  // disabled={item.id == 1 && clickCount == 1 ? true : false}
+                  onPress={() => {
+                    setList([
+                      ...list,
+                      {
+                        myImage: item.images,
+                        myName: item.productName,
+                        myPrice: item.price,
+                        myCompany: item.company,
+                        myID: item.id,
+                      },
+                    ]);
+                    // setClickCount(1);
+                  }}>
+                  <View style={styles.view4}>
+                    <MaterialIcons
+                      name="local-mall"
+                      style={{
+                        color: colors.cardBackground,
+                        marginLeft: 10,
+                        marginTop: 4,
+                      }}
+                      size={20}
+                    />
+                  </View>
+                </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
+          )}
+          horizontal={false}
+          verticalScrollIndicator={false}
+          numColumns={2}
+        />
       </View>
     </View>
   );
@@ -113,5 +174,15 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     paddingLeft: 15,
+  },
+
+  view4: {
+    color: colors.cardBackground,
+    backgroundColor: colors.black1,
+    height: 33,
+    width: 39,
+    marginTop: -90,
+    borderRadius: 50,
+    marginLeft: 5,
   },
 });

@@ -1,12 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-
-export default function Style() {
-  return (
-    <View>
-      <Text>Style</Text>
-    </View>
-  )
-}
-
-const styles = StyleSheet.create({})
+export const colors = {
+  black1: '#282931',
+  black2: '#4B4B4B',
+  black3: '#061023',
+  cardBackground: 'white',
+  statusbar: '#282931',
+  headerText: 'white',
+  pageBackground: 'white',
+};

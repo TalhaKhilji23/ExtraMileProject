@@ -1,7 +1,8 @@
-import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
-import React from 'react';
+import {StyleSheet, Text, View, Image, ScrollView, Button} from 'react-native';
+import React, {useState} from 'react';
 import {productData} from '../global/Data';
 import {add} from 'react-native-reanimated';
+import {colors} from '../global/globalStyles';
 
 export default function ProductDetails({route}) {
   const {id} = route.params;
@@ -11,8 +12,10 @@ export default function ProductDetails({route}) {
   const description = productData[id].description;
   const address = productData[id].businessAddress;
 
+
+
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
+    <View style={{flex: 1, backgroundColor: colors.cardBackground}}>
       <ScrollView>
         <Image
           style={{
@@ -24,6 +27,7 @@ export default function ProductDetails({route}) {
             marginTop: 20,
           }}
           source={{uri: img}}></Image>
+       
 
         <View>
           <Text style={styles.Text}>Product : </Text>
@@ -48,7 +52,7 @@ export default function ProductDetails({route}) {
 const styles = StyleSheet.create({
   Text: {
     fontSize: 16,
-    color: 'black',
+    color: colors.black1,
     marginLeft: 30,
     margin: 20,
   },
