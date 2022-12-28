@@ -111,7 +111,7 @@ export default function Wishlist({navigation}) {
               <View style={styles.imageView}>
                 <ProductCard
                   screenWidth={SCREEN_WIDTH * 0.425}
-                  screenHeight={SCREEN_Height * 0.185}
+                  screenHeight={SCREEN_Height * 0.190}
 
                   images={item.images}
                   productName={item.productName}
