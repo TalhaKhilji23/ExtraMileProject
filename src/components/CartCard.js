@@ -43,16 +43,14 @@ export default function CartCard({
   const [count, setCount] = useState(1);
 
   return (
-    <View>
+    <View style={{flex: 1, width: '95%'}}>
       <View
         style={{
           backgroundColor: '#FAF9F6',
-          width: '90%',
 
           marginLeft: 20,
           marginTop: 10,
           paddingBottom: 15,
-          paddingTop: -10,
           borderRadius: 10,
         }}>
         <View style={styles.cartStyle}>

@@ -6,6 +6,7 @@ import Cart from '../Screens/Cart';
 import Home from '../Screens/Home';
 import Profile from '../Screens/Profile';
 import WishListStack from './WishListStack';
+import Categories from '../Screens/Categories';
 import {colors} from '../global/globalStyles';
 
 const Tab = createBottomTabNavigator();
@@ -35,10 +36,10 @@ export default function TabNavigation() {
             activeTintColor: colors.black1,
             headerShown: false,
 
-            tabBarIcon: ({color, size}) => (
+            tabBarIcon: ({focused, size}) => (
               <MaterialIcons
                 name="home"
-                style={{color: colors.black1}}
+                color={focused ? '#7cc' : colors.black1}
                 size={25}
               />
             ),
@@ -49,25 +50,29 @@ export default function TabNavigation() {
           component={WishListStack}
           options={{
             title: 'Wishlist',
-            activeTintColor: 'red',
+            activeTintColor: colors.black1,
             headerShown: false,
-            tabBarIcon: ({color, size}) => (
-              <MaterialIcons name="favorite" style={{color: 'red'}} size={25} />
+            tabBarIcon: ({focused, size}) => (
+              <MaterialIcons
+                name="favorite"
+                color={focused ? '#7cc' : colors.black1}
+                size={25}
+              />
             ),
           }}
         />
 
         <Tab.Screen
-          name="Cart"
-          component={Cart}
+          name="Categories"
+          component={Categories}
           options={{
-            tabBarLabel: 'CartStack',
-            activeTintColor: 'red',
-            headerShown: false,
-            tabBarIcon: ({color, size}) => (
+            tabBarLabel: 'Categories',
+            activeTintColor: colors.black1,
+            headerShown: true,
+            tabBarIcon: ({focused, size}) => (
               <MaterialIcons
-                name="local-mall"
-                style={{color: colors.black1}}
+                name="auto-awesome-motion"
+                color={focused ? '#7cc' : colors.black1}
                 size={25}
               />
             ),
@@ -78,12 +83,12 @@ export default function TabNavigation() {
           component={Profile}
           options={{
             tabBarLabel: 'Profile',
-            activeTintColor: 'red',
+            activeTintColor: colors.black1,
             headerShown: false,
-            tabBarIcon: ({color, size}) => (
+            tabBarIcon: ({focused, size}) => (
               <MaterialIcons
                 name="account-circle"
-                style={{color: colors.black1}}
+                color={focused ? '#7cc' : colors.black1}
                 size={25}
               />
             ),

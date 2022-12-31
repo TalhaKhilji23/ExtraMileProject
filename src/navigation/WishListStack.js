@@ -9,6 +9,9 @@ import Wishlist from '../Screens/Wishlist';
 import WishlistHeader from '../components/WishlistHeader';
 import CartHeader from '../components/CartHeader';
 import Cart from '../Screens/Cart';
+import PaymentDetails from '../Screens/PaymentDetails';
+import PaymentLog from '../Screens/PaymentLog';
+import MapScreen from '../Screens/MapScreen';
 const Stack = createNativeStackNavigator();
 
 export default function WishListStack() {
@@ -34,6 +37,8 @@ export default function WishListStack() {
           component={ProductDetails}
           options={{headerTitle: props => <WishlistHeader {...props} />}}
         />
+        <Stack.Screen name="PaymentDetails" component={PaymentDetails} />
+        <Stack.Screen name="MapScreen" component={MapScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

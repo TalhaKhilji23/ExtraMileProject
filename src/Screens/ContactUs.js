@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function random() {
+export default function ContactUs() {
   return (
     <View>
-      <Text>random</Text>
+      <Text>ContactUs</Text>
     </View>
   )
 }

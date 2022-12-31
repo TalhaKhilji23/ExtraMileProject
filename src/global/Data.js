@@ -160,3 +160,13 @@ export const productData = [
     id: 11,
   },
 ];
+export const menu = [
+  {key: 1, title: 'BEEF'},
+  {key: 2, title: 'CHICKEN'},
+  {key: 3, title: 'VEGGIE BURGER'},
+  {key: 4, title: 'SHARE BOX'},
+  {key: 5, title: 'Happy Meals'},
+  {key: 6, title: 'Fries'},
+  {key: 7, title: 'Sides'},
+  {key: 8, title: 'Milkshakes'},
+];

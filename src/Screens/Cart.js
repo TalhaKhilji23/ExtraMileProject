@@ -13,13 +13,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import CartCard from '../components/CartCard';
 import SubTotal from '../components/SubTotal';
 import {productData} from '../global/Data';
-export default function Cart({route}) {
+export default function Cart({route, navigation}) {
   // const [event, setEvent] = useState('');
   // const [date, setDate] = useState('');
   // const [clicked, setClicked] = useState(true);
-  const [count, setCount] = useState(1);
   const [subtotal, setSubTotal] = useState(0);
-  const [inital, setinital] = useState(0);
 
   const [total, setTotal] = useState(0);
 
@@ -30,41 +28,32 @@ export default function Cart({route}) {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: colors.cardBackground}}>
-      <View
-        style={{
-          marginTop: 20,
-          height: 360,
-          width: 372,
-          marginLeft: 10,
-        }}>
-        <ScrollView>
-          {Lust.map(item => (
-            <ScrollView keyboardShouldPersistTaps="handled">
-              <View>
-                <View
-                  style={{
-                    backgroundColor: '#FAF9F6',
-                    width: '90%',
-
-                    marginLeft: 20,
-                    marginTop: 10,
-                    paddingBottom: 15,
-                    paddingTop: -10,
-                    borderRadius: 10,
-                  }}>
-                  <CartCard
-                    images={item.myImage}
-                    productName={item.myName}
-                    productPrice={item.myPrice}
-                    company={item.myCompany}
-                    list={Lust}
-                    setList={listToSet}
-                    itemnumber={item}
-                    setsubi={setSubTotal}
-                    productID={item.myID}
-                  />
-                  {/* <View style={styles.cartStyle}>
+    <ScrollView>
+      <View style={{flex: 1, backgroundColor: colors.cardBackground}}>
+        <View
+          style={{
+            marginTop: 20,
+            height: 360,
+            width: 372,
+            marginLeft: 10,
+          }}>
+          <ScrollView>
+            {Lust.map(item => (
+              <ScrollView keyboardShouldPersistTaps="handled">
+                <View>
+                  <View>
+                    <CartCard
+                      images={item.myImage}
+                      productName={item.myName}
+                      productPrice={item.myPrice}
+                      company={item.myCompany}
+                      list={Lust}
+                      setList={listToSet}
+                      itemnumber={item}
+                      setsubi={setSubTotal}
+                      productID={item.myID}
+                    />
+                    {/* <View style={styles.cartStyle}>
                     <Image
                       style={{
                         ...styles.image,
@@ -145,119 +134,125 @@ export default function Cart({route}) {
                       </TouchableOpacity>
                     </View>
                   </View> */}
+                  </View>
                 </View>
-              </View>
-            </ScrollView>
-          ))}
-        </ScrollView>
-      </View>
-      <View style={{marginTop: 10}}>
-        <Text style={styles.giftCard}> Gift Card / Discount Code</Text>
-        <View style={{flexDirection: 'row'}}>
-          <View style={styles.textInput2}>
-            <TextInput
-              style={{width: '55%', height: 40, marginLeft: 10, fontSize: 17}}
-              placeholder={'Discount Code'}
-            />
-          </View>
-          <TouchableOpacity style={{height: 40, marginTop: 10}}>
-            <View
-              style={{
-                backgroundColor: '#F3F3F3',
-                borderRadius: 25,
-                height: 40,
-                width: 60,
-                marginRight: 10,
-              }}>
-              <Text
-                style={{
-                  fontWeight: 'bold',
-                  fontSize: 15,
-                  alignSelf: 'center',
-                  marginTop: 7,
-                  color: colors.black1,
-                }}>
-                Apply
-              </Text>
-            </View>
-          </TouchableOpacity>
+              </ScrollView>
+            ))}
+          </ScrollView>
         </View>
-      </View>
+        <View style={{marginTop: 10}}>
+          <Text style={styles.giftCard}> Gift Card / Discount Code</Text>
+          <View style={{flexDirection: 'row'}}>
+            <View style={styles.textInput2}>
+              <TextInput
+                style={{width: '55%', height: 40, marginLeft: 10, fontSize: 17}}
+                placeholder={'Discount Code'}
+              />
+            </View>
+            <TouchableOpacity style={{height: 40, marginTop: 10}}>
+              <View
+                style={{
+                  backgroundColor: '#F3F3F3',
+                  borderRadius: 25,
+                  height: 40,
+                  width: 60,
+                  marginRight: 10,
+                  justifyContent: 'flex-end',
+                }}>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    fontSize: 15,
+                    alignSelf: 'center',
+                    paddingHorizontal: 5,
+                    marginBottom: 10,
+                    color: colors.black1,
+                  }}>
+                  Apply
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
 
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
-        <Text style={styles.txt1}>SubTotal</Text>
-        {/* <Text style={styles.txt2}>{subtotal}</Text> */}
-        <SubTotal sub={subtotal}></SubTotal>
-      </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <Text style={styles.txt1}>SubTotal</Text>
+          {/* <Text style={styles.txt2}>{subtotal}</Text> */}
+          <SubTotal sub={subtotal}></SubTotal>
+        </View>
 
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
-        <Text style={styles.txt1}>Shipping</Text>
-        <Text style={styles.txt2}> Rs 500</Text>
-      </View>
-      <View
-        style={{
-          borderTopWidth: 1,
-          marginTop: 10,
-          width: 350,
-          alignSelf: 'center',
-          borderStyle: 'dashed',
-          borderColor: 'lightgrey',
-        }}></View>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
-        <Text
-          style={styles.txt1}
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <Text style={styles.txt1}>Shipping</Text>
+          <Text style={styles.txt2}> Rs 500</Text>
+        </View>
+        <View
+          style={{
+            borderTopWidth: 1,
+            marginTop: 10,
+            width: 350,
+            alignSelf: 'center',
+            borderStyle: 'dashed',
+            borderColor: 'lightgrey',
+          }}></View>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <Text
+            style={styles.txt1}
+            onPress={() => {
+              setTotal(subtotal + 500);
+            }}>
+            Total
+          </Text>
+          <Text style={styles.txt2}>{total}</Text>
+        </View>
+
+        <TouchableOpacity
           onPress={() => {
-            setTotal(subtotal + 500);
-          }}>
-          Total
-        </Text>
-        <Text style={styles.txt2}>{total}</Text>
-      </View>
-
-      <TouchableOpacity
-        style={{
-          backgroundColor: colors.black1,
-          height: 50,
-          borderRadius: 12,
-          width: 350,
-          alignSelf: 'center',
-          marginTop: 20,
-          flexDirection: 'row',
-        }}>
-        <Text
-          style={{
-            color: colors.cardBackground,
-            justifyContent: 'center',
-            marginLeft: '40%',
-            fontSize: 19,
-            fontWeight: 'bold',
-            marginTop: 10,
-          }}>
-          Checkout
-        </Text>
-        <MaterialIcons
-          name="east"
-          style={{
-            color: colors.cardBackground,
-            marginLeft: 30,
-            marginTop: 10,
+            navigation.navigate('PaymentDetails');
           }}
-          size={25}
-        />
-      </TouchableOpacity>
-    </View>
+          style={{
+            backgroundColor: colors.black1,
+            height: 50,
+            borderRadius: 12,
+            width: 350,
+            alignSelf: 'center',
+            marginTop: 20,
+            flexDirection: 'row',
+          }}>
+          <Text
+            style={{
+              color: colors.cardBackground,
+              justifyContent: 'center',
+              marginLeft: '40%',
+              fontSize: 19,
+              fontWeight: 'bold',
+              marginTop: 10,
+            }}>
+            Checkout
+          </Text>
+          <MaterialIcons
+            name="east"
+            style={{
+              color: colors.cardBackground,
+              marginLeft: 30,
+              marginTop: 10,
+            }}
+            size={25}
+          />
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({

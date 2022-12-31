@@ -15,7 +15,7 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 // import { Avatar } from 'react-native-elements'
-import {Avatar, Button, Icon} from '@rneui/base';
+import {Avatar, Button, Icon, Image} from '@rneui/base';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {colors} from '../global/globalStyles';
 
@@ -24,6 +24,9 @@ const DrawerContents = props => {
     <View style={styles.container}>
       <DrawerContentScrollView {...props}>
         <View>
+          <Image source={require('../assets/logo.png')} style = {{height:50 , width:210,marginTop:20,marginLeft:20}} />
+        </View>
+        <View style = {{marginTop:30}}>
           <View style={styles.avatarContainer}>
             <Avatar
               rounded
@@ -97,7 +100,8 @@ const DrawerContents = props => {
 
         <DrawerItemList {...props} />
 
-        <View style={{borderTopWidth: 1, borderTopColor: colors.cardBackground}}>
+        <View
+          style={{borderTopWidth: 1, borderTopColor: colors.cardBackground}}>
           <Text style={styles.preferences}>Prefrences</Text>
         </View>
         <View
@@ -106,7 +110,7 @@ const DrawerContents = props => {
             height: 40,
             width: 215,
             borderRadius: 25,
-            marginTop: 365,
+            marginTop: '40%',
             marginLeft: 40,
           }}>
           <View

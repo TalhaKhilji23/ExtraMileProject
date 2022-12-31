@@ -4,6 +4,7 @@ import {
   View,
   TouchableOpacity,
   ImageBackground,
+  useWindowDimensions,
   ScrollView,
   FlatList,
   Pressable,
@@ -204,17 +205,34 @@ export default function Home({navigation}) {
         </Swiper>
       </View>
       <View style={{marginTop: -10}}>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Text>hello</Text>
-          <Text>hello</Text>
-          <Text>hello</Text>
-          <Text>hello</Text>
-        </View>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginLeft: 30,
+            }}>
+            <TouchableOpacity style={styles.tabBarStyles}>
+              <Text style={{alignSelf: 'center', padding: 5}}>All</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.tabBarStyles, {marginLeft: 15}]}>
+              <Text style={{alignSelf: 'center', padding: 5}}>Oils</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.tabBarStyles, {marginLeft: 15}]}>
+              <Text style={{alignSelf: 'center', padding: 5}}>Wheel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.tabBarStyles, {marginLeft: 15}]}>
+              <Text style={{alignSelf: 'center', padding: 5}}>Engine</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.tabBarStyles, {marginLeft: 15}]}>
+              <Text style={{alignSelf: 'center', padding: 5}}>Brakes</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.tabBarStyles, {marginLeft: 15}]}>
+              <Text style={{alignSelf: 'center', padding: 5}}>Rims</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
 
         <View>
           <FlatList
@@ -273,11 +291,14 @@ export default function Home({navigation}) {
             horizontal={true}
           />
         </View>
+
         <View
           style={{
             backgroundColor: colors.black1,
             height: 190,
             width: 310,
+            marginTop: -10,
+            marginBottom: 20,
             borderRadius: 25,
             alignSelf: 'center',
           }}>
@@ -510,5 +531,13 @@ const styles = StyleSheet.create({
     marginTop: -87,
     borderRadius: 50,
     marginLeft: 85,
+  },
+  tabBarStyles: {
+    backgroundColor: '#F6F6F6',
+    color: 'black',
+    width: 70,
+    height: 31,
+    marginBottom: 10,
+    borderRadius: 15,
   },
 });
