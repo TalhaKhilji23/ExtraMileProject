@@ -66,13 +66,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.cardBackground,
   },
   text: {
-    fontSize: 25,
+    fontSize: 26,
     marginTop: '15%',
     marginLeft: '10%',
-    width: '60%',
+    width: '70%',
 
     color: colors.black1,
-    fontWeight: '600',
+    fontWeight: '700',
   },
   TextInput: {
     alignSelf: 'center',

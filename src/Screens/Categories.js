@@ -1,24 +1,42 @@
 import * as React from 'react';
-import {View, useWindowDimensions,StyleSheet} from 'react-native';
+import {View, useWindowDimensions, StyleSheet, Text} from 'react-native';
 import {TabView, SceneMap} from 'react-native-tab-view';
-import { colors } from '../global/globalStyles';
+import {colors} from '../global/globalStyles';
 
 const FirstRoute = () => {
-  return(
-    <View style={{flex: 1, backgroundColor: 'white'}} />
+  return (
+    <View style={{flex: 1, backgroundColor: 'white'}}>
+      <Text>Heloo</Text>
+    </View>
   );
 };
 const SecondRoute = () => {
-  return <View style={{flex: 1, backgroundColor: 'white'}} />;
+  return (
+    <View style={{flex: 1, backgroundColor: 'white'}}>
+      <Text>Heloo2</Text>
+    </View>
+  );
 };
 const Third = () => {
-  return <View style={{flex: 1, backgroundColor: 'white'}} />;
+  return (
+    <View style={{flex: 1, backgroundColor: 'white'}}>
+      <Text>Heloo3</Text>
+    </View>
+  );
+};
+const Fourth = () => {
+  return (
+    <View style={{flex: 1, backgroundColor: 'white'}}>
+      <Text>Heloo4</Text>
+    </View>
+  );
 };
 
 const renderScene = SceneMap({
   first: FirstRoute,
   second: SecondRoute,
   third: Third,
+  fourth: Fourth,
 });
 
 export default function Categories() {
@@ -26,9 +44,10 @@ export default function Categories() {
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    {key: 'first', title: 'First'},
-    {key: 'second', title: 'Second'},
-    {key: 'third', title: 'Third'},
+    {key: 'first', title: 'Engine'},
+    {key: 'second', title: 'Brakes'},
+    {key: 'third', title: 'Tyres'},
+    {key: 'fourth', title: 'Exhaust'},
   ]);
 
   return (

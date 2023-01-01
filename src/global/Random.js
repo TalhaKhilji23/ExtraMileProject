@@ -1,256 +1,385 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
+  Button,
   View,
   Text,
-  FlatList,
-  StyleSheet,
-  Button,
-  TextInput,
-  Image,
   TouchableOpacity,
-  NavigationContainer,
+  SafeAreaView,
+  TextInput,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+  Image,
+  Pressable,
 } from 'react-native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import 'react-native-gesture-handler';
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import {NavigationContainer, useIsFocused} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import AsyncStorage from '@react-native-community/async-storage';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const Stack = createNativeStackNavigator();
-function DisplayCars({navigation, route}) {
-  var listOfCars = [];
-  const [newListOfCars, setListOfCars] = useState([]);
-  async function getData() {
-    try {
-      const jsonValue = await AsyncStorage.getItem('Car');
-      if (!listOfCars.includes(jsonValue)) {
-        listOfCars.push(JSON.parse(jsonValue));
-        setListOfCars(listOfCars.filter(x => x != null));
-        console.log(newListOfCars, 'New list');
-      }
-    } catch (e) {
-      console.log('Data Could not be read', e);
-    }
-  }
-  const Item = ({make, model, engine, color, year, photo}) => (
-    <View style={styles.carCardFull}>
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate('Car', {
-            makeID: make,
-            modelID: model,
-            engineID: engine,
-            colorID: color,
-            yearID: year,
-            photoID: photo,
-          })
-        }>
-        <Image
-          style={{
-            resizeMode: 'cover',
-            height: 300,
-            width: 300,
-            borderRadius: 5,
-          }}
-          source={{
-            uri: photo,
-          }}
-        />
-        <Text style={styles.carCard}>Manufacturer: {make}</Text>
-        <Text style={styles.carCard}>Model: {model}</Text>
-        <Text style={styles.carCard}>CC: {engine}</Text>
-        <Text style={styles.carCard}>Year: {year}</Text>
-        <Text style={styles.carCard}>Color: {color}</Text>
-      </TouchableOpacity>
-    </View>
-  );
-  const renderItem = ({item}) => (
-    <Item
-      make={item.make}
-      model={item.model}
-      engine={item.engine}
-      color={item.color}
-      year={item.year}
-      photo={item.photo}
-    />
-  );
+let cars = [];
+function HomeHeader(props) {
   return (
-    <View style={{alignItems: 'center', justifyContent: 'center'}}>
-      <FlatList data={newListOfCars} renderItem={renderItem} />
-      <Button title="Display Cars" onPress={getData} />
+    <View style={{flex: 1}}>
+      <MaterialIcons
+        name="menu"
+        style={{
+          color: 'black',
+          marginLeft: 20,
+          marginTop: 16,
+          height: 30,
+        }}
+        size={25}
+        onPress={() => {
+          navigation.toggleDrawer();
+        }}
+      />
+      <Text style={[styles.defaultStyle, props.style]}>{props.children}</Text>
     </View>
   );
 }
-function CardCars({navigation, route}) {
-  const {makeID, modelID, yearID, photoID, colorID, engineID} = route.params;
-  const removeCar = async () => {
-    var jsonValue = await AsyncStorage.getItem('Car');
-    if (makeID == jsonValue.make) {
-      jsonValue = jsonValue.filter(() => jsonValue.make != makeID);
-      console.log(jsonValue, 'JSOn');
-      await AsyncStorage.setItem('Car', jsonValue);
-      navigation.navigate('Display Cars');
-    }
+function GenerelHeader(props) {
+  return (
+    <View style={{flex: 1}}>
+      <Text style={[styles.defaultStyle, props.style]}>{props.children}</Text>
+    </View>
+  );
+}
+function ListOfCars({navigation, route}) {
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('AddCar');
+          }}
+          style={{
+            color: 'white',
+            backgroundColor: 'black',
+            borderRadius: 15,
+            height: 25,
+            width: 70,
+            marginRight: 5,
+            marginTop: 10,
+          }}>
+          <Text
+            style={{
+              color: 'white',
+              padding: 2,
+              alignSelf: 'center',
+            }}>
+            AddCar
+          </Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
+  const isfocussed = useIsFocused();
+  const [carsList, setCarsList] = useState([]);
+  useEffect(() => {
+    getData();
+  }, [isfocussed]);
+  const getData = async () => {
+    const carsS = await AsyncStorage.getItem('CARS');
+    setCarsList(JSON.parse(carsS));
+  };
+  const deleteCars = async index => {
+    const temData = carsList;
+    const selectedata = temData.filter((item, ind) => {
+      return ind != index;
+    });
+    setCarsList(selectedata);
+    await AsyncStorage.setItem('CARS', JSON.stringify(selectedata));
   };
   return (
-    <View>
-      <Image
-        style={{
-          resizeMode: 'cover',
-          height: 500,
-          width: 400,
-          borderRadius: 5,
-        }}
-        source={{
-          uri: photoID,
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <FlatList
+        data={carsList}
+        renderItem={({item, index}) => {
+          const img = item.photo;
+          return (
+            <View style={{width: 300, height: 180, alignSelf: 'center'}}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('CarDetails', {list: item})}>
+                <View
+                  style={{
+                    marginTop: 10,
+                    borderWidth: 1,
+                    borderColor: 'lightgrey',
+                    borderRadius: 20,
+                    backgroundColor: 'white',
+                    shadowColor: 'grey',
+                  }}>
+                  {' '}
+                  <View>
+                    <Text style={{margin: 10}}>Make :{item.make}</Text>
+                    <Text style={{marginLeft: 10}}>Model : {item.model}</Text>
+                    <Image
+                      style={{
+                        width: 90,
+                        height: 90,
+                        marginLeft: 10,
+                        borderRadius: 12,
+                        marginTop: 15,
+                        marginBottom: 5,
+                      }}
+                      source={{uri: item.photo}}></Image>
+                  </View>
+                  <View>
+                    {' '}
+                    <TouchableOpacity
+                      onPress={() => {
+                        deleteCars(index);
+                      }}
+                      style={{
+                        height: 32,
+                        width: 100,
+                        backgroundColor: 'red',
+                        marginLeft: 180,
+                        marginTop: -100,
+                        borderRadius: 10,
+                      }}>
+                      <Text
+                        style={{
+                          alignSelf: 'center',
+                          fontSize: 15,
+                          color: 'white',
+                          fontWeight: 'bold',
+                          padding: 4,
+                        }}>
+                        Delete
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            </View>
+          );
         }}
       />
-      <Text style={styles.carCard}>Manufacturer: {makeID}</Text>
-      <Text style={styles.carCard}>Model: {modelID}</Text>
-      <Text style={styles.carCard}>CC: {engineID}</Text>
-      <Text style={styles.carCard}>Year: {yearID}</Text>
-      <Text style={styles.carCard}>Color: {colorID}</Text>
-      <Button title="Delete Car" onPress={removeCar} color="#000000" />
+    </View>
+  );
+}
+function CarDetails({navigation, route}) {
+  const {list} = route.params;
+  const make = list.make;
+  const model = list.model;
+  const year = list.year;
+  const engine = list.engine;
+  const color = list.color;
+  const photo = list.photo;
+  return (
+    <View style={{flex: 1, backgroundColor: 'white'}}>
+      <ScrollView>
+        <Image
+          style={{
+            ...styles.image,
+            width: 270,
+            height: 270,
+            marginLeft: 20,
+            borderRadius: 12,
+            marginTop: 20,
+          }}
+          source={{uri: photo}}></Image>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={[styles.Text]}>Make : </Text>
+          <Text style={{color: 'grey', marginLeft: 30, marginTop: 32}}>
+            {make}
+          </Text>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={styles.Text}>Model : </Text>
+          <Text style={{color: 'grey', marginLeft: 25, marginTop: 32}}>
+            {model}
+          </Text>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={styles.Text}>Engine :</Text>
+          <Text style={{color: 'grey', marginLeft: 30, marginTop: 32}}>
+            {engine}
+          </Text>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={styles.Text}>Year : </Text>
+          <Text style={{color: 'grey', marginLeft: 40, marginTop: 32}}>
+            {year}
+          </Text>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Text style={styles.Text}>Color : </Text>
+          <Text style={{color: 'grey', marginLeft: 30, marginTop: 32}}>
+            {color}
+          </Text>
+        </View>
+      </ScrollView>
     </View>
   );
 }
 function AddCar({navigation}) {
-  const [getMake, setMake] = useState('');
-  const [getModel, setModel] = useState('');
-  const [getYear, setYear] = useState('');
-  const [getEngine, setEngine] = useState('');
-  const [getColor, setColor] = useState('');
-  const [getPhoto, setPhoto] = useState('');
-  async function storeData(
-    getMake,
-    getModel,
-    getYear,
-    getEngine,
-    getColor,
-    getPhoto,
-  ) {
-    try {
-      var carObject = {
-        make: getMake,
-        model: getModel,
-        year: getYear,
-        engine: getEngine,
-        color: getColor,
-        photo: getPhoto,
-      };
-      const jsonValue = JSON.stringify(carObject);
-      await AsyncStorage.mergeItem(getMake, jsonValue);
-      console.log('saved');
-      setMake('');
-      setModel('');
-      setYear('');
-      setEngine('');
-      setColor('');
-      setPhoto('');
-    } catch (e) {
-      console.log('Could not be saved', e);
-    }
-  }
+  const [make, setMake] = useState('');
+  const [model, setModel] = useState('');
+  const [year, setYear] = useState('');
+  const [engine, setEngine] = useState('');
+  const [color, setColor] = useState('');
+  const [photo, setPhoto] = useState('');
+  const saveCars = async () => {
+    let tempCars = [];
+    cars = [];
+    let x = JSON.parse(await AsyncStorage.getItem('CARS'));
+    tempCars = x;
+    tempCars.map(item => {
+      cars.push(item);
+    });
+    cars.push({
+      make: make,
+      model: model,
+      year: year,
+      engine: engine,
+      color: color,
+      photo: photo,
+    });
+    await AsyncStorage.setItem('CARS', JSON.stringify(cars));
+    navigation.navigate('ListOfCars');
+  };
+  const getValueFunction = () => {
+    AsyncStorage.getItem('any_key_here').then(value => setList(value));
+  };
   return (
-    <View>
-      <TextInput
-        style={styles.input}
-        placeholder="Make"
-        onChangeText={e => setMake(e)}
-        value={getMake}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Model"
-        onChangeText={e => setModel(e)}
-        value={getModel}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Year"
-        onChangeText={e => setYear(e)}
-        value={getYear}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Engine"
-        onChangeText={e => setEngine(e)}
-        value={getEngine}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Color"
-        onChangeText={e => setColor(e)}
-        value={getColor}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Photo"
-        onChangeText={e => setPhoto(e)}
-        value={getPhoto}
-      />
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <Button
-          title="Submit"
-          onPress={() =>
-            storeData(getMake, getModel, getYear, getEngine, getColor, getPhoto)
-          }
-          color="#000000"
-          disabled={
-            getMake.length == 0 ||
-            getModel.length == 0 ||
-            getPhoto == 0 ||
-            getColor == 0 ||
-            getEngine == 0
-          }
+    <SafeAreaView style={{flex: 1}}>
+      <View style={styles.container}>
+        <TextInput
+          placeholder="Enter Make"
+          value={make}
+          onChangeText={setMake}
+          underlineColorAndroid="transparent"
+          style={styles.textInputStyle}
         />
+        <TextInput
+          placeholder="Enter Model"
+          keyboardType="number-type"
+          value={model}
+          onChangeText={setModel}
+          underlineColorAndroid="transparent"
+          style={styles.textInputStyle}
+        />
+        <TextInput
+          placeholder="Enter Year"
+          value={year}
+          onChangeText={setYear}
+          underlineColorAndroid="transparent"
+          style={styles.textInputStyle}
+        />
+        <TextInput
+          placeholder="Enter Engine"
+          value={engine}
+          onChangeText={setEngine}
+          underlineColorAndroid="transparent"
+          style={styles.textInputStyle}
+        />
+        <TextInput
+          placeholder="Enter Color"
+          value={color}
+          onChangeText={setColor}
+          underlineColorAndroid="transparent"
+          style={styles.textInputStyle}
+        />
+        <TextInput
+          placeholder="Enter Photo"
+          value={photo}
+          onChangeText={setPhoto}
+          underlineColorAndroid="transparent"
+          style={styles.textInputStyle}
+        />
+        <TouchableOpacity
+          style={styles.buttonStyle}
+          disabled={
+            make.length == 0 ||
+            model.length == 0 ||
+            photo == 0 ||
+            color == 0 ||
+            engine == 0
+          }
+          onPress={() => saveCars()}>
+          <Text style={styles.buttonTextStyle}> Post </Text>
+        </TouchableOpacity>
       </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginTop: 40,
-        }}></View>
-    </View>
+    </SafeAreaView>
   );
 }
-function ManageCarScreen({navigation}) {
+function ManageCarStack() {
   return (
-    <Stack.Navigator initialRouteName="Display Cars">
-      <Stack.Screen
-        name="Cars"
-        component={DisplayCars}
-        options={{
-          headerRight: () => (
-            <Button
-              onPress={() => navigation.navigate('Add Cars')}
-              title="Add Car"
-            />
-          ),
-        }}
-      />
-      <Stack.Screen name="Car" component={CardCars} />
-      <Stack.Screen name="Add Cars" component={AddCar} />
-    </Stack.Navigator>
+    <NavigationContainer independent={true}>
+      <Stack.Navigator initialRouteName="ListOfCars">
+        <Stack.Screen
+          name="ListOfCars"
+          component={ListOfCars}
+          options={{
+            headerTitle: props => (
+              <HomeHeader
+                {...props}
+                text="List Of 
+Cars"
+                style={{marginLeft: 100, marginTop: -30}}
+              />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="CarDetails"
+          component={CarDetails}
+          options={{
+            headerTitle: props => (
+              <GenerelHeader
+                {...props}
+                style={{marginLeft: 50}}
+                text="Car Details"
+              />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="AddCar"
+          component={AddCar}
+          options={{
+            headerTitle: props => (
+              <GenerelHeader
+                {...props}
+                style={{marginLeft: 60}}
+                text="Add a Car"
+              />
+            ),
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-function ManageCarBrandsScreen({navigation}) {
+function Brands() {
   const DATA = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'Toyota',
+      title: 'Koinesegg',
     },
     {
       id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: 'Honda',
+      title: 'Toyota',
     },
     {
       id: '58694a0f-3da1-471f-bd96-145571e29d72',
       title: 'Mercedez',
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      title: 'AUDI',
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      title: 'MAclaren',
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      title: 'Poorche',
     },
   ];
   const Item = ({title}) => (
@@ -269,7 +398,103 @@ function ManageCarBrandsScreen({navigation}) {
     </View>
   );
 }
+function BrandDetails({navigation}) {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Button onPress={() => navigation.navigate('Brands')} title="Go Brand" />
+    </View>
+  );
+}
+function ManageCarBrands() {
+  return (
+    <NavigationContainer independent={true}>
+      <Stack.Navigator initialRouteName="Brands">
+        <Stack.Screen
+          name="Brands"
+          component={Brands}
+          options={{
+            title: 'Brands',
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="BrandDetails"
+          component={BrandDetails}
+          options={{
+            title: 'BrandDetails',
+            headerShown: false,
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+const Drawer = createDrawerNavigator();
+function DrawerApp() {
+  return (
+    <NavigationContainer independent={true}>
+      <Drawer.Navigator useLegacyImplementation initialRouteName="Home">
+        <Drawer.Screen
+          name="ManageCars"
+          component={ManageCarStack}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Drawer.Screen name="ManageCarBrands" component={ManageCarBrands} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
+export default function App() {
+  return (
+    <NavigationContainer independent={true}>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="drawer"
+          component={DrawerApp}
+          options={{
+            title: 'Home',
+            headerShown: false,
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: 'white',
+  },
+  buttonStyle: {
+    color: 'white',
+    backgroundColor: 'black',
+    padding: 5,
+    borderRadius: 5,
+    alignSelf: 'center',
+    marginTop: 50,
+    width: 250,
+  },
+  buttonTextStyle: {
+    padding: 5,
+    fontSize: 17,
+    color: 'white',
+    textAlign: 'center',
+  },
+  Text: {
+    fontSize: 16,
+    color: 'black',
+    marginLeft: 30,
+    marginTop: 30,
+  },
+  // ... add your default style here
+  defaultStyle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 20,
+  },
   item: {
     backgroundColor: '#blue',
     padding: 20,
@@ -278,39 +503,16 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   title: {
-    fontSize: 32,
-  },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 0,
-    padding: 10,
-  },
-  carCard: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
-    margin: 5,
-    textAlign: 'justify',
   },
-  carCardFull: {
-    borderColor: 'black',
+  textInputStyle: {
+    textAlign: 'center',
+    borderRadius: 8,
+    height: 40,
+    marginTop: 10,
+    width: '100%',
     borderWidth: 1,
-    margin: 5,
+    borderColor: 'lightgrey',
   },
 });
-const Drawer = createDrawerNavigator();
-export default function App() {
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator
-        useLegacyImplementation={true}
-        initialRouteName="Manage Cars">
-        <Drawer.Screen name="Manage Cars" component={ManageCarScreen} />
-        <Drawer.Screen
-          name="Manage Car Brands"
-          component={ManageCarBrandsScreen}
-        />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
-}

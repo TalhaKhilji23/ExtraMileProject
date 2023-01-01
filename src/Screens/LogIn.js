@@ -89,10 +89,10 @@ const styles = StyleSheet.create({
   },
   text: {
     alignSelf: 'center',
-    fontSize: 25,
+    fontSize: 26,
     marginTop: '20%',
     color: colors.black1,
-    fontWeight: '600',
+    fontWeight: '700',
   },
   TextInput: {
     alignSelf: 'center',
