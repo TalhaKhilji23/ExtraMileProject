@@ -84,7 +84,8 @@ const styles = StyleSheet.create({
   image: {
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-    height: '65%',
+    height: '66%',
+    width: '20%',
     borderRadius: 5,
   },
   productName: {
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     height: 15,
     borderRadius: 25,
     marginTop: -7,
-    marginLeft: 50,
+    marginLeft: 48,
     marginRight: -10,
   },
   view3: {
@@ -119,6 +120,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 12,
+    marginRight: 10,
     marginTop: -15,
   },
   view5: {
@@ -127,6 +129,6 @@ const styles = StyleSheet.create({
     height: 15,
     borderRadius: 25,
     marginTop: -7,
-    marginLeft: -10,
+    marginLeft: -19,
   },
 });
