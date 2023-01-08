@@ -9,6 +9,7 @@ import LogIn from '../Screens/LogIn';
 import SignUp from '../Screens/SignUp';
 import ForgotPassword from '../Screens/ForgotPassword';
 import CreatePassword from '../Screens/CreatePassword';
+// import AdminPanel from '../Screens/AdminPanel';
 const Stack = createNativeStackNavigator();
 
 const Root = () => {
@@ -22,6 +23,13 @@ const Root = () => {
             headerShown: false,
           }}
         />
+        {/* <Stack.Screen
+          name="AdminPanel"
+          component={AdminPanel}
+          options={{
+            headerShown: false,
+          }}
+        /> */}
         <Stack.Screen
           name="LogIn"
           component={LogIn}

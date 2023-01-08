@@ -7,8 +7,11 @@ import Home from '../Screens/Home';
 import Profile from '../Screens/Profile';
 import WishListStack from './WishListStack';
 import Categories from '../Screens/Categories';
+import HomeStack from './HomeStack';
 import {colors} from '../global/globalStyles';
-
+import UpdateProfile from '../Screens/UpdateProfile';
+import UserProfile from '../Screens/UserProfile';
+import ProfileStack from './ProfileStack';
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigation() {
@@ -25,14 +28,16 @@ export default function TabNavigation() {
           },
         }}>
         <Tab.Screen
-          name="Home"
-          component={Home}
+          name="HomeStack"
+          component={HomeStack}
           listeners={{
             tabPress: e => {
               setRoute('Settings');
             },
           }}
           options={{
+            tabBarLabel: 'Home',
+
             activeTintColor: colors.black1,
             headerShown: false,
 
@@ -79,8 +84,8 @@ export default function TabNavigation() {
           }}
         />
         <Tab.Screen
-          name="Profile"
-          component={Profile}
+          name="ProfileStack"
+          component={ProfileStack}
           options={{
             tabBarLabel: 'Profile',
             activeTintColor: colors.black1,

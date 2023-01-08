@@ -13,11 +13,13 @@ import MyOrders from '../Screens/MyOrders';
 import PaymentLog from '../Screens/PaymentLog';
 import Settings from '../Screens/Settings';
 import ContactUs from '../Screens/ContactUs';
-import { colors } from '../global/globalStyles';
+import {colors} from '../global/globalStyles';
+import { color } from 'react-native-reanimated';
 export default function DrawerNavigation() {
   return (
     <NavigationContainer independent={true}>
       <Drawer.Navigator
+        initialRouteName="TabNavigation"
         screenOptions={{
           drawerStyle: {
             width: 300,
@@ -34,7 +36,6 @@ export default function DrawerNavigation() {
             drawerIcon: ({focused, size}) => (
               <MaterialIcons
                 name="home"
-                
                 color={focused ? '#7cc' : colors.black1}
                 size={25}
               />
@@ -94,8 +95,8 @@ export default function DrawerNavigation() {
           component={Settings}
           options={{
             title: 'Settings',
-            headerTintColor: 'red',
-            headerShown: false,
+            headerTintColor: colors.black1,
+            headerShown: true,
             drawerIcon: ({focused, size}) => (
               <MaterialIcons
                 name="settings"
@@ -110,8 +111,8 @@ export default function DrawerNavigation() {
           component={ContactUs}
           options={{
             title: 'Contact Us',
-            headerTintColor: 'red',
-            headerShown: false,
+            headerTintColor: colors.black1,
+            headerShown: true,
             drawerIcon: ({focused, size}) => (
               <MaterialIcons
                 name="contact-page"

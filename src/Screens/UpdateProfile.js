@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
   View,
@@ -32,89 +31,90 @@ const updateAlert = () => {
 };
 const UpdateProfile = () => (
   <ScrollView style={{flex: 1, width: '100%', height: '100%'}}>
-    <Text
-      style={{
-        color: '#535353',
-        fontFamily: 'Sans-Serif',
-        fontSize: 20,
-        fontWeight: 600,
-        marginHorizontal: 15,
-        marginVertical: 15,
-      }}>
-      Edit Profile Information
-    </Text>
-    <View style={{paddingHorizontal: '10%', paddingVertical: '5%'}}>
-      <View style={styles.outer_view}>
-        <Text style={styles.outer_text}>New Name</Text>
-        <TextInput
-          style={styles.text_view}
-          placeholder="username"
-          placeholderTextColor="#535353"
-        />
+    <View>
+      <Text
+        style={{
+          color: '#535353',
+          fontFamily: 'Sans-Serif',
+          fontSize: 20,
+          fontWeight: '600',
+          marginHorizontal: 30,
+        }}>
+        Edit Profile Information
+      </Text>
+      <View style={{paddingHorizontal: '10%', paddingVertical: '5%'}}>
+        <View style={styles.outer_view}>
+          <Text style={styles.outer_text}>New Name</Text>
+          <TextInput
+            style={styles.text_view}
+            placeholder="username"
+            placeholderTextColor="#535353"
+          />
+        </View>
+        <View style={styles.outer_view}>
+          <Text style={styles.outer_text}>Old Password</Text>
+          <TextInput
+            style={styles.text_view}
+            placeholder="**********"
+            placeholderTextColor="#535353"
+          />
+        </View>
+        <View style={styles.outer_view}>
+          <Text style={styles.outer_text}>New Password</Text>
+          <TextInput
+            style={styles.text_view}
+            placeholder="*************"
+            placeholderTextColor="#535353"
+          />
+        </View>
+        <View style={styles.outer_view}>
+          <Text style={styles.outer_text}>New Email</Text>
+          <TextInput
+            style={styles.text_view}
+            placeholder="user@mail.com"
+            placeholderTextColor="#535353"
+          />
+        </View>
+        <View style={styles.outer_view}>
+          <Text style={styles.outer_text}>New Phone</Text>
+          <TextInput
+            style={styles.text_view}
+            placeholder="+921234567890"
+            placeholderTextColor="#535353"
+          />
+        </View>
+        <View style={styles.outer_view}>
+          <Text style={styles.outer_text}>New Payment Address</Text>
+          <TextInput
+            style={styles.text_view}
+            placeholder="street adress"
+            placeholderTextColor="#535353"
+          />
+        </View>
+        <View style={styles.outer_view}>
+          <Text style={styles.outer_text}>New Delivery Address</Text>
+          <TextInput
+            style={styles.text_view}
+            placeholder="street adress"
+            placeholderTextColor="#535353"
+          />
+        </View>
       </View>
-      <View style={styles.outer_view}>
-        <Text style={styles.outer_text}>Old Password</Text>
-        <TextInput
-          style={styles.text_view}
-          placeholder="**********"
-          placeholderTextColor="#535353"
-        />
+      <View
+        style={{
+          flexDirection: 'row',
+          marginTop: '10%',
+          marginHorizontal: '10%',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <TouchableOpacity style={styles.button_view1}>
+          <Text style={styles.view_text1}>Reset</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button_view2} onPress={updateAlert}>
+          <Text style={styles.view_text2}>Update</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.outer_view}>
-        <Text style={styles.outer_text}>New Password</Text>
-        <TextInput
-          style={styles.text_view}
-          placeholder="*************"
-          placeholderTextColor="#535353"
-        />
-      </View>
-      <View style={styles.outer_view}>
-        <Text style={styles.outer_text}>New Email</Text>
-        <TextInput
-          style={styles.text_view}
-          placeholder="user@mail.com"
-          placeholderTextColor="#535353"
-        />
-      </View>
-      <View style={styles.outer_view}>
-        <Text style={styles.outer_text}>New Phone</Text>
-        <TextInput
-          style={styles.text_view}
-          placeholder="+921234567890"
-          placeholderTextColor="#535353"
-        />
-      </View>
-      <View style={styles.outer_view}>
-        <Text style={styles.outer_text}>New Payment Address</Text>
-        <TextInput
-          style={styles.text_view}
-          placeholder="street adress"
-          placeholderTextColor="#535353"
-        />
-      </View>
-      <View style={styles.outer_view}>
-        <Text style={styles.outer_text}>New Delivery Address</Text>
-        <TextInput
-          style={styles.text_view}
-          placeholder="street adress"
-          placeholderTextColor="#535353"
-        />
-      </View>
-    </View>
-    <View
-      style={{
-        flexDirection: 'row',
-        marginTop: '10%',
-        marginHorizontal: '10%',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}>
-      <TouchableOpacity style={styles.button_view1}>
-        <Text style={styles.view_text1}>Reset</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button_view2} onPress={updateAlert}>
-        <Text style={styles.view_text2}>Update</Text>
-      </TouchableOpacity>
     </View>
   </ScrollView>
 );
@@ -122,7 +122,7 @@ const UpdateProfile = () => (
 const styles = StyleSheet.create({
   outer_text: {
     fontFamily: 'Sans-Serif',
-    fontWeight: 600,
+    fontWeight: '600',
     fontSize: 15,
     marginLeft: 5,
     paddingBottom: '1%',
@@ -138,17 +138,19 @@ const styles = StyleSheet.create({
     paddingVertical: '3%',
   },
   button_view1: {
+    marginTop: -50,
     backgroundColor: '#E4EDEC',
     borderRadius: 15,
-    height: '145%',
+    height: 50,
     width: '45%',
     alignItems: 'center',
     justifyContent: 'center',
   },
   button_view2: {
+    marginTop: -50,
     backgroundColor: '#282931',
     borderRadius: 15,
-    height: '145%',
+    height: 50,
     width: '45%',
     alignItems: 'center',
     justifyContent: 'center',
@@ -157,13 +159,13 @@ const styles = StyleSheet.create({
     fontFamily: 'Sans-Serif',
     fontSize: 16,
     color: 'black',
-    fontWeight: 600,
+    fontWeight: '600',
   },
   view_text2: {
     fontFamily: 'Sans-Serif',
     fontSize: 16,
     color: 'white',
-    fontWeight: 600,
+    fontWeight: '600',
   },
 });
 

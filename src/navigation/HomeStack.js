@@ -1,0 +1,48 @@
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+import ProductDetails from '../Screens/ProductDetails';
+import Wishlist from '../Screens/Wishlist';
+import WishlistHeader from '../components/WishlistHeader';
+import CartHeader from '../components/CartHeader';
+import Cart from '../Screens/Cart';
+import Home from '../Screens/Home';
+import PaymentDetails from '../Screens/PaymentDetails';
+import PaymentLog from '../Screens/PaymentLog';
+import MapScreen from '../Screens/MapScreen';
+const Stack = createNativeStackNavigator();
+
+export default function HomeStack() {
+  return (
+    <NavigationContainer independent={true}>
+      <Stack.Navigator
+        // initialRouteName="Settings"
+        initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Cart"
+          component={Cart}
+          options={{headerTitle: props => <CartHeader {...props} />}}
+        />
+        <Stack.Screen
+          name="ProductDetails"
+          component={ProductDetails}
+          options={{headerTitle: props => <WishlistHeader {...props} />}}
+        />
+        <Stack.Screen name="PaymentDetails" component={PaymentDetails} />
+        <Stack.Screen name="MapScreen" component={MapScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+const styles = StyleSheet.create({});

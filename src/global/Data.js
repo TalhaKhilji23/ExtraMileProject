@@ -10,7 +10,7 @@ export const productData = [
       'Most fine carburator in the world having the world class power and deliver speed , giving you the horse power of 550hp',
 
     id: 0,
-    count: 1,
+    category: 'engine',
   },
 
   {
@@ -39,6 +39,8 @@ export const productData = [
       lat: -26.1886781,
       Ing: 28.244879,
     },
+    category: 'interior',
+
     description:
       'The news a few months ago that Annie Ernaux was going to be awarded the Nobel Prize for Literature prompted me to think that a round-up of reviews of books by non-English authors, or set in foreign countries, would make quite an interesting article. Some of these have been',
 
@@ -49,6 +51,7 @@ export const productData = [
     productName: 'Brakes',
     price: '12000',
     company: 'NoN-Stop',
+    category: 'brakes',
 
     businessAddress: '15 Atlas Rd, Kempton Park',
     images:
@@ -63,6 +66,8 @@ export const productData = [
     productName: 'GearsSet',
     price: '2399',
     company: 'GearBg',
+    category: 'engine',
+
     businessAddress: '15 Atlas Rd, Kempton Park',
     images:
       'https://media.istockphoto.com/id/1150507732/photo/various-car-parts-and-accessories-on-black-background.jpg?s=612x612&w=0&k=20&c=UZW9qADTmNxFlrDIfi1e6mpZbHXb0vV17VOATtd_kYI=',
@@ -74,6 +79,7 @@ export const productData = [
   {
     productName: 'Rims',
     company: 'RSRims',
+    category: 'wheel',
 
     price: '4999',
     businessAddress: '15 Atlas Rd, Kempton Park',
@@ -87,6 +93,8 @@ export const productData = [
   {
     productName: 'StainlessRims',
     price: '6128',
+    category: 'wheel',
+
     businessAddress: '15 Atlas Rd, Kempton Park',
     images:
       'https://img.freepik.com/premium-photo/alloy-wheels-black-background-new-spare-parts-car-car-tuning_114160-861.jpg?w=2000',
@@ -98,6 +106,7 @@ export const productData = [
   {
     productName: 'Brakes',
     company: 'RehbarBrakes',
+    category: 'brakes',
 
     price: '2000',
     businessAddress: '15 Atlas Rd, Kempton Park',
@@ -110,6 +119,8 @@ export const productData = [
   },
   {
     productName: 'Brakes',
+    category: 'brakes',
+
     company: 'Carby',
     price: '50000',
     businessAddress: '15 Atlas Rd, Kempton Park',
@@ -123,6 +134,7 @@ export const productData = [
   {
     productName: 'Brakes',
     company: 'Carby',
+    category: 'brakes',
 
     price: '15000',
     businessAddress: '15 Atlas Rd, Kempton Park',
@@ -137,6 +149,7 @@ export const productData = [
     productName: 'Brakes',
     price: '25000',
     company: 'Carby',
+    category: 'brakes',
 
     businessAddress: '15 Atlas Rd, Kempton Park',
     images:
@@ -150,6 +163,7 @@ export const productData = [
     productName: 'Brakes',
     price: '25000',
     company: 'Carby',
+    category: 'brakes',
 
     businessAddress: '15 Atlas Rd, Kempton Park',
     images:

@@ -13,12 +13,15 @@ import {
   Alert,
   Dimensions,
   Button,
+  Animated,
 } from 'react-native';
 import {ProductCard2} from '../components/ProductCard2';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {colors} from '../global/globalStyles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
+import {useIsFocused} from '@react-navigation/native';
+
 import Swiper from 'react-native-swiper';
 import {productData} from '../global/Data';
 
@@ -27,6 +30,44 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_Height = Dimensions.get('window').height;
 
 export default function Home({navigation}) {
+  const isfocussed = useIsFocused();
+  const index2 = 10;
+  const currentValue = new Animated.Value(1);
+
+  const [liked, setLiked] = useState(false);
+  const [counter, setCounter] = useState(-2);
+  const [visible, setVisible] = useState(false);
+
+  const [List, setList] = useState([{}]);
+  const [clicked, setClicked] = useState(false);
+  const likeHander = () => {
+    if (liked == false) setVisible(true);
+
+    setLiked(!liked);
+    setCounter(index2);
+  };
+
+  useEffect(() => {
+    if (liked == true) {
+      Animated.timing(currentValue, {
+        toValue: 3,
+        friction: 2,
+        useNativeDriver: true,
+      }).start(() => {
+        Animated.timing(currentValue, {
+          toValue: 1,
+          useNativeDriver: true,
+          friction: 2,
+        }).start(() => {
+          setVisible(false);
+        });
+      });
+    }
+  }, [liked]);
+  useEffect(() => {
+    setList(productData);
+  }, [isfocussed]);
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -76,6 +117,22 @@ export default function Home({navigation}) {
             </View>
           </View>
         </View>
+        <Text
+          style={{
+            backgroundColor: 'lightgrey',
+            height: 25,
+            width: 90,
+            color: 'white',
+            alignSelf: 'flex-end',
+            borderRadius: 12,
+            marginRight: 20,
+            paddingLeft: 10,
+          }}
+          onPress={() =>
+            navigation.navigate('Cart', {Lust: List, listToSet: setList})
+          }>
+          Add to Cart
+        </Text>
         {/* onPress={() => navigation.navigate('TabNavigation')} */}
 
         <View style={{height: '12%'}}>
@@ -216,23 +273,64 @@ export default function Home({navigation}) {
                 height: 120,
                 marginBottom: 10,
               }}>
-              <TouchableOpacity style={styles.tabBarStyles}>
-                <Text style={{alignSelf: 'center', padding: 5}}>All</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setList(productData);
+                }}
+                style={[styles.tabBarStyles]}>
+                <Text
+                  style={{
+                    alignSelf: 'center',
+                    padding: 5,
+                    color: 'black',
+                  }}>
+                  All
+                </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.tabBarStyles, {marginLeft: 15}]}>
+              <TouchableOpacity
+                onPress={() => {
+                  setList(() => List.filter(item => item.category == 'oils'));
+                }}
+                style={[styles.tabBarStyles, {marginLeft: 15}]}>
                 <Text style={{alignSelf: 'center', padding: 5}}>Oils</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.tabBarStyles, {marginLeft: 15}]}>
+              <TouchableOpacity
+                onPress={() => {
+                  setList(productData);
+
+                  setList(() => List.filter(item => item.category == 'wheel'));
+                }}
+                style={[styles.tabBarStyles, {marginLeft: 15}]}>
                 <Text style={{alignSelf: 'center', padding: 5}}>Wheel</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.tabBarStyles, {marginLeft: 15}]}>
+              <TouchableOpacity
+                onPress={() => {
+                  setList(productData);
+
+                  setList(() => List.filter(item => item.category == 'engine'));
+                }}
+                style={[
+                  styles.tabBarStyles,
+                  {
+                    marginLeft: 15,
+                  },
+                ]}>
                 <Text style={{alignSelf: 'center', padding: 5}}>Engine</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.tabBarStyles, {marginLeft: 15}]}>
+              <TouchableOpacity
+                onPress={() => {
+                  setList(() => List.filter(item => item.category == 'brakes'));
+                }}
+                style={[styles.tabBarStyles, {marginLeft: 15}]}>
                 <Text style={{alignSelf: 'center', padding: 5}}>Brakes</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.tabBarStyles, {marginLeft: 15}]}>
-                <Text style={{alignSelf: 'center', padding: 5}}>Rims</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setList(productData);
+                  setList(() => List.filter(item => item.category == 'brakes'));
+                }}
+                style={[styles.tabBarStyles, {marginLeft: 15}]}>
+                <Text style={{alignSelf: 'center', padding: 5}}>Interior</Text>
               </TouchableOpacity>
             </View>
           </ScrollView>
@@ -241,7 +339,7 @@ export default function Home({navigation}) {
             <FlatList
               keyboardShouldPersistTaps="handled"
               showsHorizontalScrollIndicator={false}
-              data={productData}
+              data={List}
               keyExtractor={item => item.id}
               renderItem={({item, index}) => (
                 <TouchableOpacity
@@ -262,7 +360,7 @@ export default function Home({navigation}) {
                       // disabled={item.id == 1 && clickCount == 1 ? true : false}
                       onPress={() => {
                         setList([
-                          ...list,
+                          ...List,
                           {
                             myImage: item.images,
                             myName: item.productName,
@@ -299,6 +397,7 @@ export default function Home({navigation}) {
               backgroundColor: colors.black1,
               height: 200,
               width: '80%',
+              marginTop: -30,
               marginBottom: 20,
               borderRadius: 25,
               alignSelf: 'center',
@@ -350,9 +449,6 @@ export default function Home({navigation}) {
                         marginLeft: 40,
                       }}
                       size={18}
-                      onPress={() => {
-                        navigation.toggleDrawer();
-                      }}
                     />
                     <Text style={[styles.Second, {fontSize: 12}]}>CVT-I</Text>
                   </View>
